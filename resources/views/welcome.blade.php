@@ -29,14 +29,14 @@
             <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
               <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
                 <div class="me-3">
-                  <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+                  <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize" style="display: none;" id="iconToggler">
                     <span class="icon-menu"></span>
                   </button>
                 </div>
                 <div>
-                  <a class="navbar-brand brand-logo" href="/">
+                  <span class="navbar-brand brand-logo">
                     Apu Shop
-                  </a>
+                  </span>
                 </div>
               </div>
               <div class="navbar-menu-wrapper d-flex align-items-top"> 
@@ -45,7 +45,7 @@
                     <h1 class="welcome-text">Welcome to, <span class="text-black fw-bold">Apu Super Shop</span></h1>
                   </li>
                 </ul>
-                <ul class="navbar-nav ms-auto">
+                <ul class="d-none ms-auto" id="rightNav">
                   <li class="nav-item dropdown d-none d-lg-block">
                     <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
@@ -92,7 +92,7 @@
                         <p class="fw-light text-muted mb-0">apusupershop@gmail.com</p>
                       </div>
                       <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
-                      <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+                      <a id="signout" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
                     </div>
                   </li>
                 </ul>
@@ -102,7 +102,7 @@
               </div>
             </nav>
             <!-- partial -->
-            <div class="container-fluid page-body-wrapper">
+            <div class="container-fluid px-0 page-body-wrapper">
               <!-- partial:partials/_settings-panel.html -->
               <div class="theme-setting-wrapper">
                 <div id="settings-trigger"><i class="ti-settings"></i></div>
@@ -125,16 +125,16 @@
               
               <!-- partial -->
               <!-- partial:partials/_sidebar.html -->
-              <nav class="sidebar sidebar-offcanvas" id="sidebar">
+              <nav class="sidebar sidebar-offcanvas" style="display: none;" id="sidebar">
                 <ul class="nav">
                   <li class="nav-item">
-                    <a class="nav-link" href="/">
+                    <a class="nav-link" href="/home">
                       <i class="mdi mdi-grid-large menu-icon"></i>
                       <span class="menu-title">Dashboard</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="sell">
                       <i class="menu-icon fas fa-cart-plus"></i>
                       <span class="menu-title">Sell</span>
                     </a>
@@ -235,7 +235,7 @@
                 </ul>
               </nav>
               <!-- partial -->
-              <div class="main-panel">
+              <div class="main-panel" style="width: 100%;">
                 <div class="content-wrapper">
                  
                   <div id="app">
@@ -280,6 +280,26 @@
         <!-- End custom js for this page-->
 
         <script src="{{ asset('js/app.js') }}"></script>
+        <script>
+          document.getElementById("signout").addEventListener("click", function() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.replace("http://127.0.0.1:8000");
+            Toast.fire({
+                icon: 'success',
+                title: 'Sign out successfully'
+            })
+          });
 
+          if(localStorage.getItem('token')) {
+            document.getElementById('iconToggler').style.display = 'block';
+            document.getElementById('sidebar').style.display = 'block';
+            document.getElementById('rightNav').classList.remove('d-none');
+            document.getElementById('rightNav').classList.add('navbar-nav');
+            document.getElementsByClassName('main-panel')[0].style.width = "calc(100% - 220px)";
+          }
+
+
+        </script>
     </body>
 </html>
