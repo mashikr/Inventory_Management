@@ -37,6 +37,13 @@ const Toast = Swal.mixin({
 })
 window.Toast = Toast;
 
+// Noty
+window.Noty = require('noty');
+
+// Import Notification
+import Notification from './helpers/Notification.js';
+window.Notification = Notification;
+
 
 const app = new Vue({
     el: '#app',

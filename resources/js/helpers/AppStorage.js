@@ -7,9 +7,14 @@ class AppStorage {
         localStorage.setItem('user', user);
     }
 
-    store(token, user) {
+    storeEmail(email) {
+        localStorage.setItem('email', email);
+    }
+
+    store(token, user, email) {
         this.storageToken(token);
         this.storeUser(user);
+        this.storeEmail(email);
     }
 
     clear() {

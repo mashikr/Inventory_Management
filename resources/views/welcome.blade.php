@@ -24,7 +24,7 @@
     </head>
     <body>
 
-        <div class="container-scroller"> 
+        <div class="container-scroller" id="app"> 
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
               <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
@@ -42,7 +42,7 @@
               <div class="navbar-menu-wrapper d-flex align-items-top"> 
                 <ul class="navbar-nav">
                   <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-                    <h1 class="welcome-text">Welcome to, <span class="text-black fw-bold">Apu Super Shop</span></h1>
+                    <h1 class="welcome-text">Welcome to, <span class="text-black fw-bold">Apu Shop</span></h1>
                   </li>
                 </ul>
                 <ul class="d-none ms-auto" id="rightNav">
@@ -88,8 +88,8 @@
                         <i class="far fa-user"></i> </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                       <div class="dropdown-header text-center">
-                        <p class="mb-1 mt-3 font-weight-semibold">Apu Super Shop</p>
-                        <p class="fw-light text-muted mb-0">apusupershop@gmail.com</p>
+                        <p class="mb-1 mt-3 font-weight-semibold" id="username">Apu Super Shop</p>
+                        <p class="fw-light text-muted mb-0" id="useremail">apusupershop@gmail.com</p>
                       </div>
                       <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
                       <a id="signout" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
@@ -128,10 +128,10 @@
               <nav class="sidebar sidebar-offcanvas" style="display: none;" id="sidebar">
                 <ul class="nav">
                   <li class="nav-item">
-                    <a class="nav-link" href="/home">
+                    <router-link class="nav-link" to="/home">
                       <i class="mdi mdi-grid-large menu-icon"></i>
                       <span class="menu-title">Dashboard</span>
-                    </a>
+                    </router-link>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="sell">
@@ -187,8 +187,8 @@
                     </a>
                     <div class="collapse" id="employee">
                       <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Add Employee</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Delete Employee</a></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/employee/add">Add Employee</router-link></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/employee/all">All Employee</router-link></li>
                       </ul>
                     </div>
                   </li>
@@ -238,9 +238,9 @@
               <div class="main-panel" style="width: 100%;">
                 <div class="content-wrapper">
                  
-                  <div id="app">
+                
                     <router-view></router-view>
-                  </div>
+                 
                   
                 </div>
                 <!-- content-wrapper ends -->
@@ -292,11 +292,14 @@
           });
 
           if(localStorage.getItem('token')) {
-            document.getElementById('iconToggler').style.display = 'block';
+            document.getElementById('iconToggler').style.display = '';
             document.getElementById('sidebar').style.display = 'block';
             document.getElementById('rightNav').classList.remove('d-none');
             document.getElementById('rightNav').classList.add('navbar-nav');
-            document.getElementsByClassName('main-panel')[0].style.width = "calc(100% - 220px)";
+            
+            document.getElementById('username').innerText = localStorage.getItem('user')
+            document.getElementById('useremail').innerText = localStorage.getItem('email')
+          
           }
 
 

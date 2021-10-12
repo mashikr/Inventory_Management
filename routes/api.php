@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\EmployeeController;
+use App\Models\Employee;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +22,12 @@ Route::prefix('auth')->middleware('api')->group(function () {
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
 });
+
+Route::prefix('employee')->middleware('api')->group(function () {
+    Route::get('all', [EmployeeController::class, 'index']);
+    Route::post('add', [EmployeeController::class, 'store']);
+    Route::delete('delete/{id}', [EmployeeController::class, 'destroy']);
+    Route::get('show/{id}', [EmployeeController::class, 'show']);
+    Route::patch('edit/{id}', [EmployeeController::class, 'edit']);
+});
+
