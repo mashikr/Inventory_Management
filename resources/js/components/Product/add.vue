@@ -2,24 +2,24 @@
     <div class="row px-lg-5 mx-lg-4">
         <div class="card mt-3 shadow">
             <div class="card-header text-center">
-                <h3>Add Employee</h3>
+                <h3>Add Product</h3>
             </div>
             <div class="card-body">
-                <form enctype='multipart/form-data' @submit.prevent="addEmployee">
+                <form enctype='multipart/form-data' @submit.prevent="addProduct">
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="username">Name</label>
-                                <input type="text" name="name" class="form-control" v-model="form.name" required>
-                                <div class="text-danger" v-if="errors.name">{{ errors.name[0] }}</div>
+                                <label for="productname">Product Name</label>
+                                <input type="text" name="productname" class="form-control" v-model="form.product_name" required>
+                                <div class="text-danger" v-if="errors.product_name">{{ errors.product_name[0] }}</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" v-model="form.email" required>
-                                <div class="text-danger" v-if="errors.email">{{ errors.email[0] }}</div>
+                                <label for="product_code">Product Code</label>
+                                <input type="text" name="product_code" class="form-control" v-model="form.product_code" required>
+                                <div class="text-danger" v-if="errors.product_code">{{ errors.product_code[0] }}</div>
                             </div>
                         </div>
                     </div>
@@ -27,32 +27,19 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" name="address" v-model="form.address" id="address" required>
+                                <label for="category">Category</label>
+                                <select v-model="form.category_id" class="form-select">
+                                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.category }}</option>
+                                </select>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="salary">Salary</label>
-                                <input type="number" class="form-control" name="salary" v-model="form.salary" min="1" id="salary" required>                            
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="joining_date">Joining Date</label>
-                                <input type="date" class="form-control" name="joining_date"  v-model="form.joining_date" id="joining_date" required>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="nid">NID</label>
-                                <input type="text" class="form-control" name="nid" v-model="form.nid" id="nid" required>                            
+                                <label for="supplier">Supplier</label>
+                                <select v-model="form.supplier_id" class="form-select">
+                                    <option v-for="supplier in suppliers" :key="supplier.id" :value="supplier.id">{{ supplier.name }}</option>
+                                </select>                           
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -61,14 +48,33 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="phone_no">Phone No</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text py-0 text-dark" id="basic-addon1">+880</span>
-                                    </div>
-                                    <input type="number" class="form-control" name="phone_no"  v-model="form.phone" id="phone_no" min="1000000000" required>
-                                </div>
-                                <div class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</div>
+                                <label for="buying_price">Buying Price</label>
+                                <input type="number" class="form-control" name="buying_price" min="1" v-model="form.buying_price" id="buying_price" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="selling_price">Selling Price</label>
+                                <input type="number" class="form-control" name="selling_price" v-model="form.selling_price" min="1" id="selling_price" required>                            
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="buying_date">Buying Date</label>
+                                <input type="date" class="form-control" name="buying_date"  v-model="form.buying_date" id="buying_date" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="product_quantity">Quantity</label>
+                                <input type="number" class="form-control" name="product_quantity" v-model="form.product_quantity" id="nid" min="1" required>                            
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
                     </div>
@@ -84,7 +90,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img :src="form.photo" alt="Selected Photo"  height="80px">
+                            <img :src="form.image" alt="Selected Photo"  height="80px">
                         </div>
                     </div>
                     
@@ -103,32 +109,46 @@
             if(!User.loggedIn()) {
                 this.$router.push({name: '/'});
             }
+            axios.get("/api/category")
+                .then(res => {
+                    this.categories = res.data;
+                })
+                .catch(error => this.errorMessage = error.response.data.message)
+            
+            axios.get("/api/supplier")
+                .then(res => {
+                    this.suppliers = res.data;
+                })
+                .catch(error => this.errorMessage = error.response.data.message)
         },
         data() {
             return {
                 form: {
-                    name: null,
-                    email: null,
-                    address: null,
-                    salary: null,
-                    joining_date: null,
-                    nid: null,
-                    phone: null,
-                    photo: null,
+                    product_name: null,
+                    product_code: null,
+                    buying_price: null,
+                    selling_price: null,
+                    buying_date: null,
+                    product_quantity: null,
+                    image: null,
+                    category_id: 4,
+                    supplier_id: 3,
                 },
                 fileName: 'Chose Photo',
-                errors: {}
+                errors: {},
+                categories: {},
+                suppliers: {}
             }
         },
         methods: {
-            addEmployee() {
-               axios.post('/api/employee/add', this.form)
+            addProduct() {
+               axios.post('/api/product', this.form)
                .then((response) => {
-                   this.$router.push({ name: 'allEmployee'});
+                   this.$router.push({ name: 'allProduct'});
                    Notification.success();
                })
                .catch(error => {
-                   Notification.image_validation(error.response.data.message);
+                   Notification.error(error.response.data.message);
                    this.errors = error.response.data.errors;
                })
             },
@@ -141,12 +161,11 @@
                 if (file.size>1048770) {
                     Notification.image_validation('Upload image less than 1MB');
                 } else if(!fileExt.includes(ext)) {
-                    console.log(ext);
                      Notification.image_validation('Please insert an image file');
                 } else {
                     let reader = new FileReader();
                     reader.onload = event => {
-                        this.form.photo = event.target.result;
+                        this.form.image = event.target.result;
                     }
                     reader.readAsDataURL(file);
                 }

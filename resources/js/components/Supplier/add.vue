@@ -118,7 +118,8 @@
                 let file = event.target.files[0];
                 this.fileName = file.name;
                 const fileExt = ["jpg", "jpeg", "JPG", "png", "PNG"];
-                let ext = this.fileName.split(".")[1];
+                let ext = this.fileName.split(".");
+                ext = ext[ext.length-1];
                 if (file.size>1048770) {
                     Notification.image_validation('Upload image less than 1MB');
                 } else if(!fileExt.includes(ext)) {

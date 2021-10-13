@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\api\SupplierController;
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\ProductController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,4 +35,5 @@ Route::prefix('employee')->middleware('api')->group(function () {
 
 Route::resource('/supplier', SupplierController::class);
 Route::resource('/category', CategoryController::class);
+Route::resource('/product', ProductController::class);
 

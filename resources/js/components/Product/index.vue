@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="d-flex justify-content-between">
-            <div class="h2">Employee List</div>
+            <div class="h2">Product List</div>
              <div class="form-group" style="{width: 300px}">
                 <input type="text" name="searchEm" class="form-control" placeholder="Search" v-model="searchItem" required>
             </div>
@@ -12,25 +12,31 @@
                 <thead>
                     <tr>
                     <th scope="col">Name</th>
+                    <th scope="col">Code</th>
                     <th scope="col">Photo</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Salary</th>
-                    <th scope="col">Joining Date</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Supplier</th>
+                    <th scope="col">Buying date</th>
+                    <th scope="col">Buying Price</th>
+                    <th scope="col">Selling Price</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="employee in filterSearch" :key="employee.id">
-                    <td>{{ employee.name }}</td>
-                    <td><img :src="employee.photo ? employee.photo : '/employee_image/male-user.png'" alt="Employee photo"></td>
-                    <td>+880{{ employee.phone }}</td>
-                    <td>{{ employee.email }}</td>
-                    <td>{{ employee.salary }}</td>
-                    <td>{{ employee.joining_date }}</td>
+                    <tr v-for="product in filterSearch" :key="product.id">
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.product_code }}</td>
+                    <td><img :src="product.image" alt="Product photo"></td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.supplier }}</td>
+                    <td>{{ product.buying_date }}</td>
+                    <td>{{ product.buying_price }}</td>
+                    <td>{{ product.selling_price }}</td>
+                    <td>{{ product.product_quantity }}</td>
                     <td>
-                        <router-link :to="{name: 'editEmployee', params: {id: employee.id}}" class="btn btn-sm btn-primary">Edit</router-link>
-                        <a @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger">Delete</a>
+                        <router-link :to="{name: 'editProduct', params: {id: product.id}}" class="btn btn-sm btn-primary">Edit</router-link>
+                        <a @click="deleteProduct(product.id)" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                     </tr>
                 </tbody>
@@ -46,9 +52,9 @@ export default {
         if(!User.loggedIn()) {
                 this.$router.push({name: '/'});
         } else {
-            axios.get("/api/employee/all")
+            axios.get("/api/product")
                 .then(res => {
-                    this.employees = res.data;
+                    this.products = res.data;
                 })
                 .catch(error => this.errorMessage = error.response.data.message)
         }
@@ -56,20 +62,20 @@ export default {
     },
     data() {
         return {
-            employees:[],
+            products:[],
             errorMessage: '',
             searchItem: ''
         }
     },
     computed: {
         filterSearch() {
-            return this.employees.filter(employee => {
-                return employee.name.toLowerCase().match(this.searchItem.toLowerCase());
+            return this.products.filter(product => {
+                return product.product_name.toLowerCase().match(this.searchItem.toLowerCase());
             });
         }
     },
     methods: {
-        deleteEmployee(id) {
+        deleteProduct(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -80,15 +86,15 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete("/api/employee/delete/"+ id)
+                    axios.delete("/api/product/"+ id)
                     .then(res => {
                          Swal.fire(
                             'Deleted!',
-                            'Employee data has been deleted.',
+                            'Product has been deleted.',
                             'success'
                         )
-                        this.employees = this.employees.filter(employee => {
-                            return employee.id != id;
+                        this.products = this.products.filter(product => {
+                            return product.id != id;
                         });
 
                     })

@@ -54,7 +54,7 @@ export default {
     computed: {
         filterSearch() {
             return this.categories.filter(category => {
-                return category.category.match(this.searchItem);
+                return category.category.toLowerCase().match(this.searchItem.toLowerCase());
             });
         }
     },

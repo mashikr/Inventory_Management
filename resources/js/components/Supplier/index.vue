@@ -62,7 +62,7 @@ export default {
     computed: {
         filterSearch() {
             return this.suppliers.filter(supplier => {
-                return supplier.name.match(this.searchItem);
+                return supplier.name.toLowerCase().match(this.searchItem.toLowerCase());
             });
         }
     },

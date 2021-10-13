@@ -149,7 +149,8 @@
                     </a>
                     <div class="collapse" id="Products">
                       <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Add Product</a></li>
+                        <li class="nav-item"><router-link class="nav-link" to="/product/add">Add Product</router-link></li>
+                        <li class="nav-item"><router-link class="nav-link" to="/product/all">All Product</router-link></li>
                       </ul>
                     </div>
                   </li>
