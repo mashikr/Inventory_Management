@@ -161,7 +161,8 @@
                     </a>
                     <div class="collapse" id="Categories">
                       <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">Add Category</a></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/category/add">Add Category</router-link></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/category/all">All Category</router-link></li>
                       </ul>
                     </div>
                   </li>
@@ -200,8 +201,8 @@
                     </a>
                     <div class="collapse" id="suppliers">
                       <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Add Supplier</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Delete Supplier</a></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/supplier/add">Add Supplier</router-link></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/supplier/all">All Supplier</router-link></li>
                       </ul>
                     </div>
                   </li>

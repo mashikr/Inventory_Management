@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\EmployeeController;
-use App\Models\Employee;
+use App\Http\Controllers\api\SupplierController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,4 +30,6 @@ Route::prefix('employee')->middleware('api')->group(function () {
     Route::get('show/{id}', [EmployeeController::class, 'show']);
     Route::patch('edit/{id}', [EmployeeController::class, 'edit']);
 });
+
+Route::resource('/supplier', SupplierController::class);
 
