@@ -20,7 +20,7 @@ class Notification {
 
     error(message) {
         new Noty({
-            type: 'alert',
+            type: 'error',
             layout: 'topRight',
             text: message,
             timeout: 1000,

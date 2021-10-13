@@ -82,7 +82,7 @@ export default {
                     .then(res => {
                          Swal.fire(
                             'Deleted!',
-                            'Employee data has been deleted.',
+                            'Supplier data has been deleted.',
                             'success'
                         )
                         this.suppliers = this.suppliers.filter(supplier => {
