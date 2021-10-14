@@ -223,19 +223,36 @@
                   
                   <li class="nav-item nav-category">Cost Department</li>
                   <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#salary" aria-expanded="false" aria-controls="ui-basic">
                       <i class="menu-icon fas fa-dollar-sign"></i> 
                       <span class="menu-title">Employee Salary</span>
+                      <i class="menu-arrow"></i> 
                     </a>
+                    <div class="collapse" id="salary">
+                      <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <router-link class="nav-link" to="/salary/add">Pay Salary</router-link></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/salary/all">Salary List</router-link></li>
+                      </ul>
+                    </div>
                   </li>
+
                   <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#expense" aria-expanded="false" aria-controls="ui-basic">
                       <i class="menu-icon fas fa-hand-holding-usd"></i>
                       <span class="menu-title">Expense</span>
+                      <i class="menu-arrow"></i> 
                     </a>
+                    <div class="collapse" id="expense">
+                      <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <router-link class="nav-link" to="/expense/add">Add Expense</router-link></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/expense/all">Expense List</router-link></li>
+                      </ul>
+                    </div>
                   </li>
                 </ul>
               </nav>
+            
+              
               <!-- partial -->
               <div class="main-panel" style="width: 100%;">
                 <div class="content-wrapper">
@@ -304,6 +321,11 @@
           
           }
 
+          setTimeout(() => {
+            $(".nav-link[data-bs-toggle='collapse']").attr('aria-expanded', 'false').addClass('collapsed');
+            $("div.collapse").removeClass('show');
+            $(".nav-item").removeClass('active');
+          }, 10);
 
         </script>
     </body>

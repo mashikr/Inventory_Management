@@ -17,6 +17,12 @@ import addProduct from './components/Product/add.vue';
 import allProduct from './components/Product/index.vue';
 import editProduct from './components/Product/edit.vue';
 
+import addExpense from './components/Expense/add.vue';
+import allExpense from './components/Expense/index.vue';
+
+import addSalary from './components/Salary/add.vue';
+import allSalary from './components/Salary/index.vue';
+
 export const routes = [
     { path: '/', component: Login, name: '/' },
     { path: '/home', component: Home, name: 'home' },
@@ -36,4 +42,10 @@ export const routes = [
     { path: '/product/add', component: addProduct, name: 'addProduct' },
     { path: '/product/all', component: allProduct, name: 'allProduct' },
     { path: '/product/edit/:id', component: editProduct, name: 'editProduct' },
+
+    { path: '/expense/add', component: addExpense, name: 'addExpense' },
+    { path: '/expense/all', component: allExpense, name: 'allExpense' },
+
+    { path: '/salary/add', component: addSalary, name: 'addSalary' },
+    { path: '/salary/all', component: allSalary, name: 'allSalary' },
 ]
