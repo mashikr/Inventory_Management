@@ -36,6 +36,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="text-center" v-if="employees.length == 0">
+            <i class="fas fa-spinner fa-pulse fa-3x"></i>
+        </div>
         <div class="h2 text-danger mt-4">{{ errorMessage }}</div>
     </div>
 </template>

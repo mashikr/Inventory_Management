@@ -87,7 +87,10 @@
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">{{ category.category }}</a>
                     </li>
                 </ul>
-                <div class="tab-content" id="myTabContent">
+                <div class="text-center py-3" v-if="!filterProducts.length">
+                    <i class="fas fa-spinner fa-pulse fa-3x"></i>
+                </div>
+                <div class="tab-content" id="myTabContent" v-else>
                     <div class="form-group">
                         <input type="text" class="form-control" v-model="searchItem" @keyup="searchProduct()" placeholder="Search Products">
                     </div>
@@ -159,6 +162,7 @@ export default {
         .catch(error => {
             Notification.error(error.response.data.message);
         })
+
     },
     methods: {
         productCategoryTab(category) {
