@@ -1,6 +1,10 @@
 import Login from './components/Login.vue';
 import Home from './components/Home.vue';
 
+import Sell from './components/Sell.vue';
+import SellList from './components/Sell/SellList.vue';
+import SellPrint from './components/Sell/Print.vue';
+
 import addEmployee from './components/Employee/addEmployee.vue';
 import allEmployee from './components/Employee/allEmployee.vue';
 import editEmployee from './components/Employee/editEmployee.vue';
@@ -8,6 +12,9 @@ import editEmployee from './components/Employee/editEmployee.vue';
 import addSupplier from './components/Supplier/add.vue';
 import allSupplier from './components/Supplier/index.vue';
 import editSupplier from './components/Supplier/edit.vue';
+
+import addCustomer from './components/Customer/add.vue';
+import allCustomer from './components/Customer/index.vue';
 
 import addCategory from './components/Category/add.vue';
 import allCategory from './components/Category/index.vue';
@@ -27,6 +34,10 @@ export const routes = [
     { path: '/', component: Login, name: '/' },
     { path: '/home', component: Home, name: 'home' },
 
+    { path: '/sell', component: Sell, name: 'sell' },
+    { path: '/sell-list', component: SellList, name: 'SellList' },
+    { path: '/sell-print/:id', component: SellPrint, name: 'sellPrint' },
+
     { path: '/employee/add', component: addEmployee, name: 'addEmployee' },
     { path: '/employee/all', component: allEmployee, name: 'allEmployee' },
     { path: '/employee/edit/:id', component: editEmployee, name: 'editEmployee' },
@@ -34,6 +45,9 @@ export const routes = [
     { path: '/supplier/add', component: addSupplier, name: 'addSupplier' },
     { path: '/supplier/all', component: allSupplier, name: 'allSupplier' },
     { path: '/supplier/edit/:id', component: editSupplier, name: 'editSupplier' },
+
+    { path: '/customer/add', component: addCustomer, name: 'addCustomer' },
+    { path: '/customer/all', component: allCustomer, name: 'allCustomer' },
     
     { path: '/category/add', component: addCategory, name: 'addCategory' },
     { path: '/category/all', component: allCategory, name: 'allCategory' },

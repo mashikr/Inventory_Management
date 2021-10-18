@@ -152,7 +152,7 @@
             addImage(event) {
                 let file = event.target.files[0];
                 this.fileName = file.name;
-                const fileExt = ["jpg", "jpeg", "JPG", "png", "PNG"];
+                const fileExt = ["jpg", "jpeg", "JPG", "png", "PNG", "jfif"];
                  let ext = this.fileName.split(".");
                 ext = ext[ext.length-1];
                 if (file.size>1048770) {

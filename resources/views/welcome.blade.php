@@ -134,10 +134,16 @@
                     </router-link>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="sell">
+                    <router-link class="nav-link" to="/sell">
                       <i class="menu-icon fas fa-cart-plus"></i>
                       <span class="menu-title">Sell</span>
-                    </a>
+                    </router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link class="nav-link" to="/sell-list">
+                      <i class="menu-icon fas fa-list"></i>
+                      <span class="menu-title">Sell List</span>
+                    </router-link>
                   </li>
 
                   <li class="nav-item nav-category">Product Department</li>
@@ -215,8 +221,8 @@
                     </a>
                     <div class="collapse" id="customer">
                       <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Add Customer</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Delete Customer</a></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/customer/add">Add Customer</router-link></li>
+                        <li class="nav-item"> <router-link class="nav-link" to="/customer/all">All Customer</router-link></li>
                       </ul>
                     </div>
                   </li>
@@ -266,7 +272,7 @@
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                   <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © Apu Super Shop 2021. All rights reserved.</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © Apu Super Shop <span id="date">2020</span>. All rights reserved.</span>
                   </div>
                 </footer>
                 <!-- partial -->
@@ -312,7 +318,7 @@
 
           if(localStorage.getItem('token')) {
             document.getElementById('iconToggler').style.display = '';
-            document.getElementById('sidebar').style.display = 'block';
+            document.getElementById('sidebar').style.display = '';
             document.getElementById('rightNav').classList.remove('d-none');
             document.getElementById('rightNav').classList.add('navbar-nav');
             
@@ -326,6 +332,9 @@
             $("div.collapse").removeClass('show');
             $(".nav-item").removeClass('active');
           }, 10);
+
+          let d = new Date();
+          $('#date').text(d.getFullYear());
 
         </script>
     </body>

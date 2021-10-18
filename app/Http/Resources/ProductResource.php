@@ -23,7 +23,7 @@ class ProductResource extends JsonResource
             'buying_date' => $this->buying_date,
             'product_quantity' => $this->product_quantity,
             'image' => $this->image,
-            'category' => $this->category->category,
+            'category' => empty($this->category->category)?null:$this->category->category,
             'supplier' => $this->supplier->name,
         ];
     }

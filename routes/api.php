@@ -9,6 +9,8 @@ use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\api\ExpenseController;
 use App\Http\Controllers\api\SalaryController;
+use App\Http\Controllers\api\SellController;
+use App\Http\Controllers\api\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,4 +42,7 @@ Route::resource('/category', CategoryController::class);
 Route::resource('/product', ProductController::class);
 Route::resource('/expense', ExpenseController::class);
 Route::resource('/salary', SalaryController::class);
+Route::resource('/sell', SellController::class);
+Route::resource('/customer', CustomerController::class);
+Route::post('/customer/search', [CustomerController::class, 'search']);
 

@@ -83,7 +83,7 @@
 
 <script>
     export default {
-         created() {
+        created() {
             if(!User.loggedIn()) {
                 this.$router.push({name: '/'});
             }
