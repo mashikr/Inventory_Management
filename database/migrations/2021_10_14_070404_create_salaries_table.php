@@ -19,6 +19,7 @@ class CreateSalariesTable extends Migration
             $table->string('month');
             $table->string('year');
             $table->timestamps();
+            $table->foreignId('employee_id')->constrained('employees') ->onDelete('cascade');
         });
     }
 

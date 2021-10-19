@@ -25,6 +25,8 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->integer('product_quantity');
             $table->timestamps();
+            $table->foreignId('category_id')->constrained('categories') ->onDelete('cascade');
+            $table->foreignId('supplier_id')->constrained('suppliers') ->onDelete('cascade');
         });
     }
 

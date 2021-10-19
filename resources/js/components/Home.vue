@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-end">
             <input type="date" name="" class="form-control mb-3" style="width:10rem;" id="" v-model="datepick" @change="datePick()">
         </div>
-        <div class="text-center" v-if="!calculation">
+        <div class="text-center mt-3" v-if="!calculation">
             <i class="fas fa-spinner fa-pulse fa-3x"></i>
         </div>
         <div class="row" v-if="calculation">
@@ -68,7 +68,10 @@
                 </div>
             </div>
         </div>
-        <div class="m-2">
+        <div class="text-center mt-5" v-if="!monthData && calculation">
+            <i class="fas fa-spinner fa-pulse fa-3x"></i>
+        </div>
+        <div class="m-2" v-else>
             <div class="p-3" id="line_top_x"></div>
         </div>
     </div>

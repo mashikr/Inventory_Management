@@ -101,7 +101,7 @@
                                 <div class="p-2">
                                     <h6 class="text-center font-weight-bold">{{ product.product_name }}</h6>
                                     <p class="text-center mb-0 font-weight-bold text-info">{{ product.selling_price }}৳</p>
-                                    <p class="text-center mb-0 font-weight-bold text-success">Stock: {{ product.product_quantity }}</p> 
+                                    <p class="text-center mb-0 font-weight-bold" :class="{'text-success': product.product_quantity, 'text-danger': !product.product_quantity }">Stock: {{ product.product_quantity }}</p> 
                                 </div>
                             </div>
                         </div>
@@ -195,6 +195,8 @@ export default {
             })
             if(check) {
                Notification.error("This Product already in cart.");
+            } else if (product.product_quantity == 0) {
+                Notification.error("This Product is out of stock.");
             } else {
                 product.quantity = 1;
                 product.unit = product.selling_price

@@ -19,6 +19,7 @@ class CreateSellsTable extends Migration
             $table->text('products');
             $table->text('payments');
             $table->timestamps();
+            $table->foreignId('customer_id')->constrained('customers') ->onDelete('cascade');           
         });
     }
 

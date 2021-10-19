@@ -147,18 +147,6 @@
                       </ul>
                     </div>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#Stock" aria-expanded="false" aria-controls="tables">
-                      <i class="menu-icon fas fa-layer-group"></i>
-                      <span class="menu-title">Stock</span>
-                      <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="Stock">
-                      <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Stock</a></li>
-                      </ul>
-                    </div>
-                  </li>
 
                   <li class="nav-item nav-category">HR Departmen</li>
                   <li class="nav-item">
