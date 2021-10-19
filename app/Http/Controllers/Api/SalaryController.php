@@ -21,7 +21,7 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        return SalaryResource::collection(Salary::all());
+        return SalaryResource::collection(Salary::orderBy('id', 'DESC')->get());
     }
 
     /**

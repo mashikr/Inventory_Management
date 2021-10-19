@@ -44,8 +44,7 @@ window.Noty = require('noty');
 import Notification from './helpers/Notification.js';
 window.Notification = Notification;
 
-
 const app = new Vue({
     el: '#app',
-    router
+    router,
 });

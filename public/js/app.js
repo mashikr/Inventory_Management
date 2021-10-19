@@ -3166,16 +3166,162 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
+    var _this = this;
+
     if (!User.loggedIn()) {
       this.$router.push({
         name: '/'
       });
     }
+
+    var date = new Date();
+    this.collectCal(date);
+    axios.get("/api/dashboard/monthdata").then(function (res) {
+      var data = Object.values(res.data);
+
+      _this.drawChart(data);
+
+      _this.monthData = data;
+    })["catch"](function (error) {
+      return _this.errorMessage = error.response.data.message;
+    });
   },
   data: function data() {
-    return {};
+    return {
+      calculation: null,
+      datepick: null,
+      monthData: null
+    };
+  },
+  methods: {
+    datePick: function datePick() {
+      this.collectCal(this.datepick);
+    },
+    collectCal: function collectCal(date) {
+      var _this2 = this;
+
+      axios.post("/api/dashboard/calculation", {
+        date: date
+      }).then(function (res) {
+        _this2.calculation = res.data;
+      })["catch"](function (error) {
+        return _this2.errorMessage = error.response.data.message;
+      });
+    },
+    drawChart: function drawChart(datas) {
+      google.charts.load('current', {
+        'packages': ['line']
+      });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Day');
+        data.addColumn('number', 'Sells');
+        data.addColumn('number', 'Income');
+        data.addColumn('number', 'Expense');
+        data.addRows(datas);
+        var options = {
+          chart: {
+            title: 'This Month Shop Status',
+            subtitle: 'in taka (BDT)'
+          },
+          width: 100 + '%',
+          height: 500,
+          axes: {
+            x: {
+              0: {
+                side: 'top'
+              }
+            }
+          },
+          colors: ['#1F3BB3', '#34B1AA', '#F95F53']
+        };
+        var chart = new google.charts.Line(document.getElementById('line_top_x'));
+        chart.draw(data, google.charts.Line.convertOptions(options));
+      }
+    }
+  },
+  computed: {
+    day: function day() {
+      if (this.datepick) {
+        return this.datepick;
+      } else {
+        return 'Today';
+      }
+    }
   }
 });
 
@@ -51475,9 +51621,198 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    home\n")])
+  return _c("div", [
+    _c("div", { staticClass: "d-flex justify-content-end" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.datepick,
+            expression: "datepick"
+          }
+        ],
+        staticClass: "form-control mb-3",
+        staticStyle: { width: "10rem" },
+        attrs: { type: "date", name: "", id: "" },
+        domProps: { value: _vm.datepick },
+        on: {
+          change: function($event) {
+            return _vm.datePick()
+          },
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.datepick = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    !_vm.calculation
+      ? _c("div", { staticClass: "text-center" }, [
+          _c("i", { staticClass: "fas fa-spinner fa-pulse fa-3x" })
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.calculation
+      ? _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-6 col-md-4 col-lg-3 mb-2" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header text-center" }, [
+                _c("b", [_vm._v(_vm._s(_vm.day) + " Sell")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-3 d-flex justify-content-between align-items-center"
+                },
+                [
+                  _c("div", { staticClass: "h3" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.calculation.total_sell) +
+                        " ৳\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6 col-md-4 col-lg-3 mb-2" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header text-center" }, [
+                _c("b", [_vm._v(_vm._s(_vm.day) + " Income")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-3 d-flex justify-content-between align-items-center"
+                },
+                [
+                  _c("div", { staticClass: "h3" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.calculation.total_income) +
+                        " ৳\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6 col-md-4 col-lg-3 mb-2" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header text-center" }, [
+                _c("b", [_vm._v(_vm._s(_vm.day) + " Selling item")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-3 d-flex justify-content-between align-items-center"
+                },
+                [
+                  _c("div", { staticClass: "h3" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.calculation.total_item) +
+                        " ৳\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6 col-md-4 col-lg-3 mb-2" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header text-center" }, [
+                _c("b", [_vm._v(_vm._s(_vm.day) + " Expense")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-3 d-flex justify-content-between align-items-center"
+                },
+                [
+                  _c("div", { staticClass: "h3" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.calculation.total_expense) +
+                        " ৳\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ]
+              )
+            ])
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm._m(4)
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("i", { staticClass: "fas fa-cart-plus fa-2x text-primary" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("i", { staticClass: "fas fa-money-check-alt fa-2x text-success" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("i", { staticClass: "fas fa-box-open fa-2x text-info" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("i", { staticClass: "fas fa-hand-holding-usd fa-2x text-danger" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "m-2" }, [
+      _c("div", { staticClass: "p-3", attrs: { id: "line_top_x" } })
+    ])
+  }
+]
 render._withStripped = true
 
 

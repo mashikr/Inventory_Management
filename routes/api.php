@@ -11,6 +11,7 @@ use App\Http\Controllers\api\ExpenseController;
 use App\Http\Controllers\api\SalaryController;
 use App\Http\Controllers\api\SellController;
 use App\Http\Controllers\api\CustomerController;
+use App\Http\Controllers\api\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,4 +46,7 @@ Route::resource('/salary', SalaryController::class);
 Route::resource('/sell', SellController::class);
 Route::resource('/customer', CustomerController::class);
 Route::post('/customer/search', [CustomerController::class, 'search']);
+
+Route::post('/dashboard/calculation', [DashboardController::class, 'calculation']);
+Route::get('/dashboard/monthdata', [DashboardController::class, 'monthdata']);
 

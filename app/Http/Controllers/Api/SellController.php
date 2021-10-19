@@ -75,6 +75,7 @@ class SellController extends Controller
             $item['name'] = $product['product_name'];
             $item['quantity'] = $product['quantity'];
             $item['price'] = $product['unit'];
+            $item['buying_price'] = $product['buying_price'];
 
             array_push($products, $item);
             $prod = Product::findOrFail($product['id']);

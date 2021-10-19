@@ -19,7 +19,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        return response()->json(Expense::all());
+        return response()->json(Expense::orderBy('id',"DESC")->get());
     }
 
     /**

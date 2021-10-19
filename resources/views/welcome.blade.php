@@ -46,34 +46,8 @@
                   </li>
                 </ul>
                 <ul class="d-none ms-auto" id="rightNav">
-                  <li class="nav-item dropdown d-none d-lg-block">
-                    <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
-                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-                      {{-- <a class="dropdown-item py-3" >
-                        <p class="mb-0 font-weight-medium float-left">Select category</p>
-                      </a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item preview-item">
-                        <div class="preview-item-content flex-grow py-2">
-                          <p class="preview-subject ellipsis font-weight-medium text-dark">Bootstrap Bundle </p>
-                          <p class="fw-light small-text mb-0">This is a Bundle featuring 16 unique dashboards</p>
-                        </div>
-                      </a>
-                      <a class="dropdown-item preview-item">
-                        <div class="preview-item-content flex-grow py-2">
-                          <p class="preview-subject ellipsis font-weight-medium text-dark">Angular Bundle</p>
-                          <p class="fw-light small-text mb-0">Everything you’ll ever need for your Angular projects</p>
-                        </div>
-                      </a> --}}
-                    </div>
-                  </li>
                   <li class="nav-item d-none d-lg-block">
-                    <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
-                      <span class="input-group-addon input-group-prepend border-right">
-                        <span class="icon-calendar input-group-text calendar-icon"></span>
-                      </span>
-                      <input type="text" class="form-control">
-                    </div>
+                    
                   </li>
                   <li class="nav-item">
                     <form class="search-form" action="#">
@@ -261,7 +235,7 @@
               
               <!-- partial -->
               <div class="main-panel" style="width: 100%;">
-                <div class="content-wrapper">
+                <div class="content-wrapper bg-white">
                  
                 
                     <router-view></router-view>
@@ -288,8 +262,6 @@
         <!-- endinject -->
         <!-- Plugin js for this page -->
         <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
-        <script src="{{ asset('vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
-        <script src="{{ asset('vendors/progressbar.js/progressbar.min.js') }}"></script>
 
         <!-- End plugin js for this page -->
         <!-- inject:js -->
@@ -303,7 +275,7 @@
         <script src="{{ asset('vendors/dashboard.js') }}"></script>
         <script src="{{ asset('vendors/Chart.roundedBarCharts.js') }}"></script>
         <!-- End custom js for this page-->
-
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="{{ asset('js/app.js') }}"></script>
         <script>
           document.getElementById("signout").addEventListener("click", function() {
@@ -334,7 +306,7 @@
           }, 10);
 
           let d = new Date();
-          $('#date').text(d.getFullYear());
+          $('#date').text(d.getFullYear());         
 
         </script>
     </body>
