@@ -15,7 +15,7 @@ class CreateSellsTable extends Migration
     {
         Schema::create('sells', function (Blueprint $table) {
             $table->id();
-            $table->integer('customer_id');
+            $table->integer('customer_id')->unsigned();
             $table->text('products');
             $table->text('payments');
             $table->timestamps();
